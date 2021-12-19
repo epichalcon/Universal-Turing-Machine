@@ -2,37 +2,37 @@ from os import truncate
 
 
 class MTU():
-    cinta:'list[str]'
-    posicion:int
+    __cinta:'list[str]'
+    __posicion:int
 
     '''
     La cinta usara '-' para el separador del registro inicial
     y '/' para el separador del registro general
     '''
     def __init__(self, cinta:str) -> None:
-        self.cinta = list(cinta)
-        self.posicion = cinta.index('/')
+        self.__cinta = list(cinta)
+        self.__posicion = cinta.index('/')
 
     def execute(self):
         self.__estado0()
-        return self.cinta
+        return self.__cinta
 
     def output(self):
-        asterisc = self.cinta.index('*')
-        separador = self.cinta.index('-')
-        cinta = self.cinta[:separador]
-        cinta[asterisc] = self.cinta[separador + 3]
+        asterisc = self.__cinta.index('*')
+        separador = self.__cinta.index('-')
+        cinta = self.__cinta[:separador]
+        cinta[asterisc] = self.__cinta[separador + 3]
         return str(cinta)
 
     def __transicion(self,car,direccion):
-        self.cinta[self.posicion] = car
+        self.__cinta[self.__posicion] = car
         if direccion == 'd':
-            self.posicion += 1
+            self.__posicion += 1
         if direccion == 'i':
-            self.posicion -= 1
+            self.__posicion -= 1
 
     def __get_char(self):
-        return self.cinta[self.posicion].__str__()
+        return self.__cinta[self.__posicion].__str__()
 
 # Modulo localizador
     def __estado0(self):
@@ -106,7 +106,7 @@ class MTU():
             self.__transicion('a','d')
             self.__estado6()
 
-        elif self.posicion == len(self.cinta):
+        elif self.__posicion == len(self.__cinta):
             print('terminado')
 
     def __estado6(self):
@@ -296,7 +296,7 @@ class MTU():
             self.__transicion(self.__get_char(), 'd')
 
         validos = ['0','1','#']
-        if self.__get_char() in validos or self.posicion == len(self.cinta):
+        if self.__get_char() in validos or self.__posicion == len(self.__cinta):
             self.__transicion(self.__get_char(),'i')
             self.__estado26()
 
