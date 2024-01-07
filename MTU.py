@@ -1,5 +1,9 @@
 from os import truncate
 
+class Invalid_End(Exception):
+    def __init__(self, expression, message) -> None:
+        self.expression = expression
+        self.message = message
 
 class MTU():
     __cinta:'list[str]'
@@ -10,6 +14,8 @@ class MTU():
     y '/' para el separador del registro general
     '''
     def __init__(self, cinta:str) -> None:
+        if cinta[-1] != '#':
+            raise Invalid_End(cinta, 'la cinta debe acabar en #')
         self.__cinta = list(cinta)
         self.__posicion = cinta.index('/')
 
