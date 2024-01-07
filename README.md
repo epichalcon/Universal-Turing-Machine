@@ -26,17 +26,9 @@ The initial state of the tape is represented by the first section of the input a
 The example shown above would represent the following states:
 
 ```mermaid
-journey
-	title Me studying for exams
-	section Exam is announced
-		I start studying: 1: Me
-		Make notes: 2: Me
-		Ask friend for help: 3: Me, Friend
-		We study togther: 5: Me, Friend
-	section Exam Day
-		Syllabys is incomplete: 2: Me
-		Give exam: 1: Me, Friend
-	section Result Declared
-		I passed the exam with destinction!: 5: Me
-		Friend barely gets passing marks: 2: Friend
+flowchart LR
+    q0((q0)) -->|1/0 R| q1
+    q1((q1)) --> |1/1 R| q1
+    q1 --> |0/1 R| q2((q2))
 ```
+Where the state transitions are represented as [initial/final direction]
